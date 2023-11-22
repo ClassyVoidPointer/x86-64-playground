@@ -1,7 +1,10 @@
 ; this is a program that places a number into a register and prints it
 
 global _start:
+section .data
 number: 	db 	9
+
+section .text
 
 _start:
     mov r8, 48 			; first store the position of '0' in the ascii table
@@ -10,7 +13,7 @@ _start:
 
     mov rax, 1 			; write syscall
     mov rdi, 1			; stdout file handle
-    mov rsi, r8 		
+    mov rsi, r8
     mov rdx, 1
     syscall
 
