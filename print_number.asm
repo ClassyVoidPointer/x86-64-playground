@@ -1,24 +1,22 @@
 ; this is a program that places a number into a register and prints it
 
-global _start:
+global _start
 section .data
-number: 	db 	9
+number: 	db 	9, 10
 
 section .text
-
 _start:
-    mov r8, 48 			; first store the position of '0' in the ascii table
-    mov r9, [number] 		; move into r9 the number
-    add r8, r9 			; move the result of the addition into the r8 register '9'
+	xor rax, rax
+	add rax, 48
+	add rax, [number]
+	mov [number], al
+	
+	mov rax, 1
+	mov rdi, 1
+	lea rsi, number
+	mov rdx, 2
+	syscall
 
-    mov rax, 1 			; write syscall
-    mov rdi, 1			; stdout file handle
-    mov rsi, r8
-    mov rdx, 1
-    syscall
-
-    mov rax, 60
-    xor rdi, rdi
-    syscall
-
-
+	mov rax, 60
+	xor rdi, rdi
+	syscall
